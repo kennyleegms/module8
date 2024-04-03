@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+<body>
+<h1>TASK MANAGER</h1>
+<form action={% url "home_page" %} method="post">
+{% csrf_token %}
+{{registration_form.as_p}}
+
+<button name ="post" value = {{primary_key.id}}><h1>{{add_or_update}}</h1></button>
+<h3>{{message_id}}</h3>
+<h3>{{message_task_name}}</h3>
+<h3>{{message_category}}</h3>
+<h3>{{message_due_date}}</h3>
+<br>
+<h1 style="color:green">{{message_success}}</h1>
+
+<br>
+<br>
+<br>
+<hr>
+
+<table border="10">
+<tr align="center">
+    <th width="50000">Task ID</th>
+    <th width="50000">Task Name</th>
+    <th width="50000">Category</th>
+    <th width="50000">Due Date</th>
+    <th width="50000">(Delete)</th>
+    <th width="50000">(Update)</th>
+</tr>
+
+{% for x in display_alls %}
+<tr align="center">
+    <td>{{x.id}}</td>
+    <td>{{x.task_name}}</td>
+    <td>{{x.category}}</td>
+    <td>{{x.due_date}}</td>
+    <td><button name="delete" value={{x.id}} formnovalidate>DELETE</button></td>
+    <td><button name="put" value={{x.id}} formnovalidate>UPDATE</button></td>
+</tr>
+{% endfor %}
+</table>
+</form>    
+</body>
+</html>
